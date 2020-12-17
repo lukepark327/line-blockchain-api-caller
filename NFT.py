@@ -186,12 +186,12 @@ if __name__ == "__main__":
     # )
     # print(res)
 
-    # check specific NFT's info.
-    res = getTokenInfo(
-        contractId='658b4b8a',
-        number='00000002'
-    )
-    print(res)
+    # # check specific NFT's info.
+    # res = getTokenInfo(
+    #     contractId='658b4b8a',
+    #     number='00000002'
+    # )
+    # print(res)
 
     # # update token info.
     # res = updateTokenInfo(
