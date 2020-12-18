@@ -71,3 +71,9 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/buyimage 
 ```
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/gettx -d '{"txHash": "DCD0B2D32E9329D77AA642A55DC10469A876767493D2F60254A70E4DCD099202"}'
 ```
+
+# Test
+
+```
+curl http://localhost:5000/test
+```

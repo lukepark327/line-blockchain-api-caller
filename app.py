@@ -23,7 +23,7 @@ def adduser():
     res = fantopia.add_user(params)
     pprint(res)
 
-    return res or 'Success'
+    return json.dumps(res) or 'Success'
 
 
 @app.route('/addartist', methods=['POST'])
@@ -35,7 +35,7 @@ def addartist():
     res = fantopia.add_artist(params)
     pprint(res)
 
-    return res or 'Success'
+    return json.dumps(res) or 'Success'
 
 
 @app.route('/uploadimage', methods=['POST'])
@@ -54,7 +54,7 @@ def uploadimage():
     )
     pprint(res)
 
-    return res or 'Success'
+    return json.dumps(res) or 'Success'
 
 
 @app.route('/buyimage', methods=['POST'])
@@ -71,7 +71,7 @@ def buyimage():
     )
     pprint(res)
 
-    return res or 'Success'
+    return json.dumps(res) or 'Success'
 
 
 @app.route('/gettx', methods=['POST'])
@@ -88,7 +88,69 @@ def gettx():
     )
     pprint(res)
 
-    return res or 'Success'
+    return json.dumps(res) or 'Success'
+
+
+@app.route('/test', methods=['GET'])
+def test():
+    ress = []
+
+    # Load info.
+    with open('./users.json') as f:
+        users = json.load(f)
+
+    owner = users['Owner']
+    artist = users['Artist']
+    user_A = users['Customer_A']
+    user_B = users['Customer_B']
+
+    with open('./config.json') as f:
+        config = json.load(f)
+
+    # Add artist
+    fantopia.add_artist(artist)
+
+    # Add user
+    fantopia.add_user(user_A)
+    fantopia.add_user(user_B)
+
+    # Upload image
+    # description must have 'artist' & 'price' field
+    # which formal one is the wallet address of the artist.
+    res = fantopia.upload_image(
+        who=user_A['address'],
+        imageURI='./images/1.jpeg',
+        name='NVIDIA RTX TITAN',
+        description={
+            'artist': artist['address'],
+            'something': 'nothing'
+        },
+        amount=5,
+        price=10000
+    )
+    pprint(res)
+    ress.append(res)
+
+    # Buy image
+    res = fantopia.buy(
+        fromAddress=user_B['address'],
+        toAddress=user_A['address'],
+        tokenIndex='00000085',
+        price='10000'
+    )
+    pprint(res)
+    ress.append(res)
+
+    res = get_transaction_info(
+        server_url=config['server_url'],
+        service_api_key=config['service_api_key'],
+        service_api_secret=config['service_api_secret'],
+        txHash="DCD0B2D32E9329D77AA642A55DC10469A876767493D2F60254A70E4DCD099202"
+    )
+    pprint(res)
+    ress.append(res)
+
+    return json.dumps(ress) or 'Success'
 
 
 if __name__ == "__main__":

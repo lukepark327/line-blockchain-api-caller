@@ -216,7 +216,7 @@ if __name__ == "__main__":
     res = fantopia.buy(
         fromAddress=user_B['address'],
         toAddress=user_A['address'],
-        tokenIndex='00000075',
+        tokenIndex='00000085',
         price='10000'
     )
     pprint(res)
