@@ -5,6 +5,7 @@ import json
 
 from NFT import NFT
 from ST import ServiceToken
+from utils import get_transaction_info
 
 
 class Image:
@@ -215,5 +216,13 @@ if __name__ == "__main__":
         toAddress=user_A['address'],
         tokenIndex='00000075',
         amount='10000'
+    )
+    pprint(res)
+
+    res = get_transaction_info(
+        server_url=config['server_url'],
+        service_api_key=config['service_api_key'],
+        service_api_secret=config['service_api_secret'],
+        txHash="DCD0B2D32E9329D77AA642A55DC10469A876767493D2F60254A70E4DCD099202"
     )
     pprint(res)
