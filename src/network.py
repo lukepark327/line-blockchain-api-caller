@@ -1,4 +1,6 @@
-import hmac, hashlib, base64
+import hmac
+import hashlib
+import base64
 
 
 def get_signature(method, path, nonce, timestamp, service_api_secret, body=None):
@@ -6,7 +8,7 @@ def get_signature(method, path, nonce, timestamp, service_api_secret, body=None)
     if body is not None:
         keys = sorted(body.keys())
         req = '&'.join([key_ + '=' + str(body[key_]) for key_ in keys])
-    
+
     if req != '':
         requiredMsg = nonce + str(timestamp) + method + path + '?' + req
     else:
