@@ -102,7 +102,7 @@ def holder(
     return res.json()
 
 
-def getTokenInfo(
+def get(
     contractId: str,
     number: str
 ):
@@ -124,7 +124,7 @@ def getTokenInfo(
     return res.json()
 
 
-def updateTokenInfo(
+def update(
     contractId: str,
     number: str,
     name: str,
@@ -157,12 +157,17 @@ def updateTokenInfo(
 
 
 if __name__ == "__main__":
+    pass
+
+    # You can check more info. about Tx at below:
+    # https://explorer.blockchain.line.me/cashew/transaction/{txHash}
+
     # Hyperparams.
-    server_url = 'https://test-api.blockchain.line.me'  # os.environ['SERVER_URL']
-    service_api_key = '58632256-34f9-4342-8194-8022f4ec5ccb'  # os.environ['SERVICE_API_KEY']
-    service_api_secret = '9e7533fc-a90e-481c-ba94-0ce76ed3826a'  # os.environ['SERVICE_AP_SECRET']
-    ownerAddress = 'tlink1jweegl733lmfdusfknelge8d82ftcfmrnm3r48'
-    ownerSecret = 'zqDvlusIMR+Ci1WparUmk/CfKXeKtxCPR23SzbzGroo='
+    server_url = os.environ['SERVER_URL']
+    service_api_key = os.environ['SERVICE_API_KEY']
+    service_api_secret = os.environ['SERVICE_AP_SECRET']
+    ownerAddress = os.environ['OWNER_ADDRESS']
+    ownerSecret = os.environ['OWNER_SECRET']
 
     # # mint NFT
     # res = mint(
@@ -186,21 +191,18 @@ if __name__ == "__main__":
     # )
     # print(res)
 
-    # # check specific NFT's info.
-    # res = getTokenInfo(
-    #     contractId='658b4b8a',
-    #     number='00000002'
-    # )
-    # print(res)
+    # check specific NFT's info.
+    res = get(
+        contractId='658b4b8a',
+        number='00000002'
+    )
+    print(res)
 
     # # update token info.
-    # res = updateTokenInfo(
+    # res = update(
     #     contractId='658b4b8a',
     #     number='00000002',
     #     name='BTS1',
     #     meta='A BTS picture'
     # )
     # print(res)
-
-    # You can check more info. about Tx at below:
-    # https://explorer.blockchain.line.me/cashew/transaction/{txHash}
