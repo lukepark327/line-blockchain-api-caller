@@ -1,15 +1,15 @@
 {
     "Owner": {
-        "address": "tlink1jweegl733lmfdusfknelge8d82ftcfmrnm3r48",
-        "secret": "zqDvlusIMR+Ci1WparUmk/CfKXeKtxCPR23SzbzGroo="
+        "address": "tlink18vsd3cautlyt759sw5hq9tydhzrsrgrmprs4f0",
+        "secret": "gD6Skn0b66WLt5oq8OYe0ejI4OzjthyWMYm4V7gqamg="
     },
     "Artist": {
         "address": "tlink1e38npkztaq90vvc3gnjhn0th8w52na005ahqf0",
         "secret": "QC3PbuSMC101uDBCOTWJeCsjSCuI57XvVnUDH8623iw="
     },
     "Customer_A": {
-        "address": "tlink18vsd3cautlyt759sw5hq9tydhzrsrgrmprs4f0",
-        "secret": "gD6Skn0b66WLt5oq8OYe0ejI4OzjthyWMYm4V7gqamg"
+        "address": "tlink1jweegl733lmfdusfknelge8d82ftcfmrnm3r48",
+        "secret": "zqDvlusIMR+Ci1WparUmk/CfKXeKtxCPR23SzbzGroo="
     },
     "Customer_B": {
         "address": "tlink1lnl66me3geg6t2l62w07rx5j2utewvn54908vd",

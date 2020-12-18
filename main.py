@@ -51,6 +51,8 @@ class Fantopia:
         self.artist_fee = 0.0025  # 0.25%
         self.platform_fee = 0.0005  # 0.05%
 
+        self.config = config
+
     # def change_owner(self):
     #     pass
 
@@ -109,21 +111,21 @@ class Fantopia:
         fromAddress: str,
         toAddress: str,
         tokenIndex: str,
-        amount: str
+        price: str
     ):
         meta = json.loads(self.nft.get_info(tokenIndex)['responseData']['meta'])
         artistAddress = str(meta['artist'])
-        price = str(meta['price'])
+        price_ = str(meta['price'])
 
-        if amount != price:
+        if price != price_:
             return
 
-        amount = int(amount)
-        for_artist = int(amount * self.artist_fee)
-        for_platform = int(amount * self.platform_fee)
-        for_receiver = int(amount - for_artist - for_platform)
+        price = int(price)
+        for_artist = int(price * self.artist_fee)
+        for_platform = int(price * self.platform_fee)
+        for_receiver = int(price - for_artist - for_platform)
 
-        amount = str(amount)
+        price = str(price)
         for_artist = str(for_artist)
         for_platform = str(for_platform)
         for_receiver = str(for_receiver)
@@ -215,7 +217,7 @@ if __name__ == "__main__":
         fromAddress=user_B['address'],
         toAddress=user_A['address'],
         tokenIndex='00000075',
-        amount='10000'
+        price='10000'
     )
     pprint(res)
 
