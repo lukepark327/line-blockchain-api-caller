@@ -81,9 +81,6 @@ class Fantopia:
         res = []
 
         # mint NFT
-        if who not in self.ownership:
-            self.ownership[who] = []
-
         for i in range(amount):
             image = Image(
                 imageURI=imageURI,
