@@ -10,7 +10,7 @@ from pprint import pprint
 from fantopia_offline import Fantopia
 
 import sys
-sys.path.append('../../')
+sys.path.append('../../caller/')
 from NFT import NFT
 from ST import ServiceToken
 from utils import get_transaction_info

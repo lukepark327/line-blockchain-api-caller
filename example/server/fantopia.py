@@ -4,7 +4,7 @@ import hashlib
 import json
 
 import sys
-sys.path.append('../../')
+sys.path.append('../../caller/')
 from NFT import NFT
 from ST import ServiceToken
 from utils import get_transaction_info
