@@ -22,7 +22,9 @@ docker run -d -p 5000:5000 fantopia
 
 # Curl
 
-## Add artist
+## System
+
+### Add artist
 
 ```
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/addartist -d '{"address": "tlink1e38npkztaq90vvc3gnjhn0th8w52na005ahqf0", "secret": "QC3PbuSMC101uDBCOTWJeCsjSCuI57XvVnUDH8623iw="}'
@@ -31,7 +33,7 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/addartist
 * `address`: Wallet address
 * `secret`: PW
 
-## Add user
+### Add user
 
 ```
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/adduser -d '{"address": "tlink1jweegl733lmfdusfknelge8d82ftcfmrnm3r48", "secret": "zqDvlusIMR+Ci1WparUmk/CfKXeKtxCPR23SzbzGroo="}'
@@ -42,7 +44,9 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/adduser -
 * `address`: Wallet address
 * `secret`: PW
 
-## Upload image
+## Image
+
+### Upload image
 
 ```
 curl -i -X PUT http://localhost:5000/uploadimage -F who="tlink1jweegl733lmfdusfknelge8d82ftcfmrnm3r48" -F name="1.jpeg" -F file=@"client_images/1.jpeg" -F amount="5"
@@ -54,7 +58,7 @@ curl -i -X PUT http://localhost:5000/uploadimage -F who="tlink1jweegl733lmfdusfk
 * `amount`: (optional) How many images you want to sell
 * `price`: (optional) Price of the image
 
-## Upload detail
+### Upload detail of image
 
 ```
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/uploaddetail -d '{"tokenIndex": "00000085", "name": "1.jpeg", "description": {"artist": "tlink1e38npkztaq90vvc3gnjhn0th8w52na005ahqf0", "agency": "Loen Entertainment", "schedule": "2019 IU concert", "date": "12/01/2019", "minted": "01/12/2020"}, "amount": "5", "price": "10000"}'
@@ -66,21 +70,21 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/uploaddet
 * `amount`: (optional) How many images you want to sell
 * `price`: (optional) Price of the image
 
-## Download one image
+### Get one image
 
 ```
-curl -X POST -H 'Content-Type: application/json' http://localhost:5000/downloadimage -d '{"name": "1.jpeg"}'
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getimage -d '{"name": "1.jpeg"}'
 ```
 
 If saving file is needed, try:
 
 ```
-curl -X POST -H 'Content-Type: application/json' http://localhost:5000/downloadimage -d '{"name": "1.jpeg"}' > output.jpeg
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getimage -d '{"name": "1.jpeg"}' > output.jpeg
 ```
 
 **Notice**: Python Flask supports sending only one file at once.
 
-## Get detail
+### Get detail of image
 
 ```
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getdetail -d '{"name": "1.jpeg"}'
@@ -88,7 +92,7 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getdetail
 
 * `name`: Unique name of the file
 
-## Get multiple images' detail
+### Get multiple images' detail
 
 ```
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getdetails -d '{"names": ["1.jpeg"]}'
@@ -96,7 +100,7 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getdetail
 
 * `names`: The array of the multiple files' name
 
-## Buy image
+### Buy image
 
 ```
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/buyimage -d '{"fromAddress": "tlink1lnl66me3geg6t2l62w07rx5j2utewvn54908vd", "toAddress": "tlink1jweegl733lmfdusfknelge8d82ftcfmrnm3r48", "tokenIndex": "00000085", "price": "10000"}'
@@ -107,13 +111,49 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/buyimage 
 * `tokenIndex`: NFT token index
 * `price`: Price of the image. It MUST be same as seller-uploaded price.
 
-## Get transaction info.
+## Product
+
+### Upload product
+
+```
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/uploadproduct -d '{"name": "Cup", "nft_number": "00000085", "nft_name": "1.jpeg"}'
+```
+
+### Get one image of product
+
+```
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getproductimage -d '{"name": "Cup"}'
+```
+
+If saving file is needed, try:
+
+```
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getproductimage -d '{"name": "Cup"}' > output.jpeg
+```
+
+**Notice**: Python Flask supports sending only one file at once.
+
+### Get detail of product
+
+```
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getproductdetail -d '{"name": "Cup"}'
+```
+
+### Get multiple products' detail
+
+```
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getproductdetails -d '{"names": ["Cup"]}'
+```
+
+## Utils
+
+### Get transaction info.
 
 ```
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/gettx -d '{"txHash": "DCD0B2D32E9329D77AA642A55DC10469A876767493D2F60254A70E4DCD099202"}'
 ```
 
-# Test
+### Test
 
 ```
 curl http://localhost:5000/test

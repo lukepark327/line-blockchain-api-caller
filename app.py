@@ -80,8 +80,8 @@ def uploaddetail():
     return json.dumps(res) or 'Success'
 
 
-@app.route('/downloadimage', methods=['POST'])
-def downloadimage():
+@app.route('/getimage', methods=['POST'])
+def getimage():
     params = json.loads(request.get_data(), encoding='utf-8')
     if len(params) == 0:
         return 'No parameter'
@@ -141,6 +141,70 @@ def buyimage():
         tokenIndex=params['tokenIndex'],
         price=params['price']
     )
+    pprint(res)
+
+    return json.dumps(res) or 'Success'
+
+
+@app.route('/uploadproduct', methods=['POST'])
+def uploadproduct():
+    params = json.loads(request.get_data(), encoding='utf-8')
+    if len(params) == 0:
+        return 'No parameter'
+
+    fantopia.upload_product(
+        name=params['name'],
+        nft_number=params['nft_number'],
+        nft_name=params['nft_name'],
+    )
+
+    return 'Success'
+
+
+@app.route('/getproductimage', methods=['POST'])
+def getproduct():
+    params = json.loads(request.get_data(), encoding='utf-8')
+    if len(params) == 0:
+        return 'No parameter'
+
+    info = fantopia.get_product(
+        name=params['name']
+    )
+    _name = info['nft_name']
+
+    serverBaseURI = 'server_images' if 'serverBaseURI' not in params else params['serverBaseURI']
+
+    return send_file(serverBaseURI + '/' + _name, as_attachment=True)
+
+
+@app.route('/getproductdetail', methods=['POST'])
+def getproductdetail():
+    params = json.loads(request.get_data(), encoding='utf-8')
+    if len(params) == 0:
+        return 'No parameter'
+
+    res = fantopia.get_nft_detail(
+        name=params['name']
+    )
+    pprint(res)
+
+    return json.dumps(res) or 'Success'
+
+
+@app.route('/getproductdetails', methods=['POST'])
+def getproductdetails():
+    params = json.loads(request.get_data(), encoding='utf-8')
+    if len(params) == 0:
+        return 'No parameter'
+
+    names = params['names']
+
+    res = []
+
+    for name in names:
+        res.append(fantopia.get_nft_detail(
+            name=name
+        ))
     pprint(res)
 
     return json.dumps(res) or 'Success'

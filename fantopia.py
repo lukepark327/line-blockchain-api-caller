@@ -76,6 +76,38 @@ class ImageServer:
         return self.images[(name, str(number))]['hash']
 
 
+class ProductServer:
+    def __init__(
+        self
+    ):
+        self.products = dict()
+
+    def upload_product(
+        self,
+        name: str,
+        nft_number: str,
+        nft_name: str,
+    ):
+        self.products['name'] = {
+            'nft_number': nft_number,
+            'nft_name': nft_name
+        }
+
+    def get_product(
+        self,
+        name: str
+    ):
+        return self.products['name']
+
+    def get_nft_detail(
+        self,
+        img_server: ImageServer,
+        name: str
+    ):
+        _name = self.products['name']['nft_name']
+        return img_server.get_description(_name)
+
+
 class Fantopia:
     def __init__(
         self,
@@ -98,6 +130,7 @@ class Fantopia:
         self.config = config
 
         self.img_server = ImageServer(serverBaseURI='server_images')
+        self.product_server = ProductServer()
 
     # def change_owner(self):
     #     pass
@@ -240,6 +273,20 @@ class Fantopia:
             )
 
         return res
+
+    def upload_product(
+        self,
+        name: str,
+        nft_number: str,
+        nft_name: str,
+    ):
+        self.product_server.upload_product(name, nft_number, nft_name)
+
+    def get_product(self, name: str):
+        return self.product_server.get_product(name)
+
+    def get_nft_detail(self, name: str):
+        return self.product_server.get_nft_detail(self.img_server, name)
 
     def buy(
         self,
