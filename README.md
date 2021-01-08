@@ -1,9 +1,12 @@
 # line-blockchain-api-caller
 python implementations of LINE blockchain API caller
 
+Refer [`./caller`](https://github.com/lukepark327/line-blockchain-api-caller/tree/main/caller) .
+
 ---
 
-# Concrete example: Fantopia
+# Concrete example
+# :european_castle: Fantopia
 
 <!--
 *Fantopia* is the ...
@@ -30,7 +33,7 @@ docker run -d -p 5000:5000 fantopia
 cd example/client
 ```
 
-## System
+## :couple: User
 
 ### Add artist
 
@@ -52,7 +55,7 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/adduser -
 * `address`: Wallet address
 * `secret`: PW
 
-## Image
+## :floppy_disk: Image
 
 ### Upload image
 
@@ -119,7 +122,7 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/buyimage 
 * `tokenIndex`: NFT token index
 * `price`: Price of the image. It MUST be same as seller-uploaded price.
 
-## Product
+## :coffee: Product
 
 ### Upload product
 
@@ -153,7 +156,7 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getproduc
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getproductdetails -d '{"names": ["Cup"]}'
 ```
 
-## Utils
+## :wrench: Utils
 
 ### Get transaction info.
 
