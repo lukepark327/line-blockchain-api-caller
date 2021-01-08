@@ -2,10 +2,12 @@ import base64
 import time
 import hashlib
 import json
-from flask import Flask, request
+from flask import Flask, request, send_file
+from werkzeug.utils import secure_filename
 from pprint import pprint
 
-from main import Image, Fantopia
+# from fantopia import Fantopia
+from fantopia_offline import Fantopia
 from NFT import NFT
 from ST import ServiceToken
 from utils import get_transaction_info
@@ -20,10 +22,9 @@ def adduser():
     if len(params) == 0:
         return 'No parameter'
 
-    res = fantopia.add_user(params)
-    pprint(res)
+    fantopia.add_user(params)
 
-    return json.dumps(res) or 'Success'
+    return 'Success'
 
 
 @app.route('/addartist', methods=['POST'])
@@ -32,27 +33,98 @@ def addartist():
     if len(params) == 0:
         return 'No parameter'
 
-    res = fantopia.add_artist(params)
+    fantopia.add_artist(params)
+
+    return 'Success'
+
+
+@app.route('/uploadimage', methods=['POST', 'PUT'])
+def uploadimage():
+    _who = request.form['who']
+    _name = request.form['name']
+    _file = request.files['file']
+    _amount = 1 if 'amount' not in request.form else int(request.form['amount'])
+    _price = None if 'price' not in request.form else int(request.form['price'])
+
+    res = fantopia.upload_image(
+        who=_who,
+        name=_name,
+        image_bytes=_file.read(),
+        # description=_discription
+        amount=_amount,
+        price=_price
+    )
     pprint(res)
 
     return json.dumps(res) or 'Success'
 
 
-@app.route('/uploadimage', methods=['POST'])
-def uploadimage():
+@app.route('/uploaddetail', methods=['POST'])
+def uploaddetail():
     params = json.loads(request.get_data(), encoding='utf-8')
     if len(params) == 0:
         return 'No parameter'
 
-    res = fantopia.upload_image(
-        who=params['address'],
-        imageURI=params['imageURI'],
+    _amount = 1 if 'amount' not in params else int(params['amount'])
+    _price = None if 'price' not in params else int(params['price'])
+
+    res = fantopia.upload_detail(
+        number=params['tokenIndex'],
         name=params['name'],
-        description=params['description'],
-        amount=int(params['amount']),
-        price=int(params['price'])
+        new_description=params['description'],
+        amount=_amount,
+        price=_price
     )
     pprint(res)
+
+    return json.dumps(res) or 'Success'
+
+
+@app.route('/downloadimage', methods=['POST'])
+def downloadimage():
+    params = json.loads(request.get_data(), encoding='utf-8')
+    if len(params) == 0:
+        return 'No parameter'
+
+    serverBaseURI = 'server_images' if 'serverBaseURI' not in params else params['serverBaseURI']
+    name = params['name']
+
+    return send_file(serverBaseURI + '/' + name, as_attachment=True)
+
+
+@app.route('/getdetail', methods=['POST'])
+def getdetail():
+    params = json.loads(request.get_data(), encoding='utf-8')
+    if len(params) == 0:
+        return 'No parameter'
+
+    name = params['name']
+
+    res = []
+
+    res.append(fantopia.img_server.get_description(
+        name=name
+        # number=i,
+    ))
+
+    return json.dumps(res) or 'Success'
+
+
+@app.route('/getdetails', methods=['POST'])
+def getdetails():
+    params = json.loads(request.get_data(), encoding='utf-8')
+    if len(params) == 0:
+        return 'No parameter'
+
+    names = params['names']
+
+    res = []
+
+    for name in names:
+        res.append(fantopia.img_server.get_description(
+            name=name
+            # number=i,
+        ))
 
     return json.dumps(res) or 'Success'
 
@@ -117,13 +189,22 @@ def test():
     # Upload image
     # description must have 'artist' & 'price' field
     # which formal one is the wallet address of the artist.
+    name = '1.jpeg'
+    with open('client_images/' + name, 'rb') as f:
+        image_bytes = f.read()
+
     res = fantopia.upload_image(
         who=user_A['address'],
-        imageURI='./images/1.jpeg',
-        name='NVIDIA RTX TITAN',
+        name=name,
+        image_bytes=image_bytes,
         description={
-            'artist': artist['address'],
-            'something': 'nothing'
+            # 'SN':
+            'artist': artist['address'],  # 'IU(01)'
+            'agency': 'Loen Entertainment',
+            'schedule': '2019 IU concert',
+            'date': '12/01/2019',
+            'minted': '01/12/2020'
+            # 'owner':
         },
         amount=5,
         price=10000

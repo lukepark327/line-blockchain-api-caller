@@ -25,7 +25,7 @@ docker run -d -p 5000:5000 fantopia
 ## Add artist
 
 ```
-curl -X POST -H 'Content-Type: application/json' http://localhost:5000/adduser -d '{"address": "tlink1e38npkztaq90vvc3gnjhn0th8w52na005ahqf0", "secret": "QC3PbuSMC101uDBCOTWJeCsjSCuI57XvVnUDH8623iw="}'
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/addartist -d '{"address": "tlink1e38npkztaq90vvc3gnjhn0th8w52na005ahqf0", "secret": "QC3PbuSMC101uDBCOTWJeCsjSCuI57XvVnUDH8623iw="}'
 ```
 
 * `address`: Wallet address
@@ -45,15 +45,56 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/adduser -
 ## Upload image
 
 ```
-curl -X POST -H 'Content-Type: application/json' http://localhost:5000/uploadimage -d '{"address": "tlink18vsd3cautlyt759sw5hq9tydhzrsrgrmprs4f0", "imageURI": "./images/1.jpeg", "name": "NVIDIA RTX TITAN", "description": {"artist": "tlink1e38npkztaq90vvc3gnjhn0th8w52na005ahqf0", "something": "nothing"}, "amount": "5", "price": "10000"}'
+curl -i -X PUT http://localhost:5000/uploadimage -F who="tlink1jweegl733lmfdusfknelge8d82ftcfmrnm3r48" -F name="1.jpeg" -F file=@"client_images/1.jpeg" -F amount="5"
 ```
 
-* `address`: Wallet address of uploader
-* `imageURI`: URI of image at server-side (therefore, you need to send the image before calling the `uploadimage` API)
-* `name`: Name of the image
-* `description`: dictionary-like details about the image. It MUST includes an `artist` field.
-* `amount`: How many images you want to sell
-* `price`: Price of the image.
+* `who`: Wallet address of uploader
+* `name`: Unique name of the file
+* `file`: URI of the file
+* `amount`: (optional) How many images you want to sell
+* `price`: (optional) Price of the image
+
+## Upload detail
+
+```
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/uploaddetail -d '{"tokenIndex": "00000085", "name": "1.jpeg", "description": {"artist": "tlink1e38npkztaq90vvc3gnjhn0th8w52na005ahqf0", "agency": "Loen Entertainment", "schedule": "2019 IU concert", "date": "12/01/2019", "minted": "01/12/2020"}, "amount": "5", "price": "10000"}'
+```
+
+* `tokenIndex`: NFT token index
+* `name`: Unique name of the file
+* `description`: dictionary-like details about the image. It MUST includes `artist`, `agency`, `schedule`, `date` and `minted` fields.
+* `amount`: (optional) How many images you want to sell
+* `price`: (optional) Price of the image
+
+## Download one image
+
+```
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/downloadimage -d '{"name": "1.jpeg"}'
+```
+
+If saving file is needed, try:
+
+```
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/downloadimage -d '{"name": "1.jpeg"}' > output.jpeg
+```
+
+**Notice**: Python Flask supports sending only one file at once.
+
+## Get detail
+
+```
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getdetail -d '{"name": "1.jpeg"}'
+```
+
+* `name`: Unique name of the file
+
+## Get multiple images' detail
+
+```
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getdetails -d '{"names": ["1.jpeg"]}'
+```
+
+* `names`: The array of the multiple files' name
 
 ## Buy image
 
