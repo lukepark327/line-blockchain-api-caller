@@ -5,14 +5,15 @@ Refer [`./caller`](https://github.com/lukepark327/line-blockchain-api-caller/tre
 
 ---
 
-# Concrete example
 # :european_castle: Fantopia
+
+The concrete example of LINE blockchain API caller.
 
 <!--
 *Fantopia* is the ...
 -->
 
-# Run
+# Run (Server-side)
 
 ```
 cd example/server
@@ -27,11 +28,13 @@ docker build -t fantopia:latest .
 docker run -d -p 5000:5000 fantopia
 ```
 
-# Curl
+# Curl (Client-side)
 
 ```
 cd example/client
 ```
+
+All commands below should be executed at the path `example/client` .
 
 ## :couple: User
 
@@ -130,6 +133,10 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/buyimage 
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/uploadproduct -d '{"name": "Cup", "nft_number": "00000085", "nft_name": "1.jpeg"}'
 ```
 
+* `name`: Unique name of the product
+* `nft_number`: NFT token index
+* `nft_name`: Unique name of the image
+
 ### Get one image of product
 
 ```
@@ -150,11 +157,15 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getproduc
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getproductdetail -d '{"name": "Cup"}'
 ```
 
+* `name`: Unique name of the product
+
 ### Get multiple products' detail
 
 ```
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getproductdetails -d '{"names": ["Cup"]}'
 ```
+
+* `names`: The array of the multiple products' name
 
 ## :wrench: Utils
 
