@@ -1,6 +1,8 @@
 # line-blockchain-api-caller
 python implementations of LINE blockchain API caller
 
+---
+
 # Concrete example: Fantopia
 
 <!--
@@ -10,17 +12,23 @@ python implementations of LINE blockchain API caller
 # Run
 
 ```
+cd example/server
 python app.py
 ```
 
 *or*
 
 ```
+cd example/server
 docker build -t fantopia:latest .
 docker run -d -p 5000:5000 fantopia
 ```
 
 # Curl
+
+```
+cd example/client
+```
 
 ## System
 
@@ -49,7 +57,7 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/adduser -
 ### Upload image
 
 ```
-curl -i -X PUT http://localhost:5000/uploadimage -F who="tlink1jweegl733lmfdusfknelge8d82ftcfmrnm3r48" -F name="1.jpeg" -F file=@"client_images/1.jpeg" -F amount="5"
+curl -i -X PUT http://localhost:5000/uploadimage -F who="tlink1jweegl733lmfdusfknelge8d82ftcfmrnm3r48" -F name="1.jpeg" -F file=@"images/1.jpeg" -F amount="5"
 ```
 
 * `who`: Wallet address of uploader
