@@ -1,7 +1,7 @@
 # line-blockchain-api-caller
-python implementations of LINE blockchain API caller
+Python implementations of LINE blockchain API caller
 
-Refer [`./caller`](https://github.com/lukepark327/line-blockchain-api-caller/tree/main/caller) .
+See [`./caller`](https://github.com/lukepark327/line-blockchain-api-caller/tree/main/caller) for source codes.
 
 ---
 
