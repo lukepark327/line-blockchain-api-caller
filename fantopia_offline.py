@@ -3,8 +3,6 @@ import time
 import hashlib
 import json
 
-# import sys
-# sys.path.append('../../caller/')
 # from NFT import NFT
 # from ST import ServiceToken
 # from utils import get_transaction_info
@@ -13,7 +11,7 @@ import json
 class ImageServer:
     def __init__(
         self,
-        serverBaseURI: str = 'images'
+        serverBaseURI: str = 'server_images'
     ):
         self.serverBaseURI = serverBaseURI
 
@@ -131,7 +129,7 @@ class Fantopia:
 
         self.config = config
 
-        self.img_server = ImageServer(serverBaseURI='images')
+        self.img_server = ImageServer(serverBaseURI='server_images')
         self.product_server = ProductServer()
 
     # def change_owner(self):
@@ -384,7 +382,7 @@ if __name__ == "__main__":
     # description must have 'artist' & 'price' field
     # which formal one is the wallet address of the artist.
     name = '1.jpeg'
-    with open('images/' + name, 'rb') as f:
+    with open('client_images/' + name, 'rb') as f:
         image_bytes = f.read()
 
     res = fantopia.upload_image(

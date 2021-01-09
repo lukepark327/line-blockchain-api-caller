@@ -9,8 +9,6 @@ from pprint import pprint
 # from fantopia import Fantopia
 from fantopia_offline import Fantopia
 
-import sys
-sys.path.append('../../caller/')
 from NFT import NFT
 from ST import ServiceToken
 from utils import get_transaction_info
@@ -89,7 +87,7 @@ def getimage():
     if len(params) == 0:
         return 'No parameter'
 
-    serverBaseURI = 'images' if 'serverBaseURI' not in params else params['serverBaseURI']
+    serverBaseURI = 'server_images' if 'serverBaseURI' not in params else params['serverBaseURI']
     name = params['name']
 
     return send_file(serverBaseURI + '/' + name, as_attachment=True)
@@ -175,7 +173,7 @@ def getproduct():
     )
     _name = info['nft_name']
 
-    serverBaseURI = 'images' if 'serverBaseURI' not in params else params['serverBaseURI']
+    serverBaseURI = 'server_images' if 'serverBaseURI' not in params else params['serverBaseURI']
 
     return send_file(serverBaseURI + '/' + _name, as_attachment=True)
 
@@ -257,7 +255,7 @@ def test():
     # description must have 'artist' & 'price' field
     # which formal one is the wallet address of the artist.
     name = '1.jpeg'
-    with open('images/' + name, 'rb') as f:
+    with open('client_images/' + name, 'rb') as f:
         image_bytes = f.read()
 
     res = fantopia.upload_image(
