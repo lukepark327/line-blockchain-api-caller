@@ -16,25 +16,17 @@ The concrete example of LINE blockchain API caller.
 # Run (Server-side)
 
 ```
-cd example/server
 python app.py
 ```
 
 *or*
 
 ```
-cd example/server
 docker build -t fantopia:latest .
 docker run -d -p 5000:5000 fantopia
 ```
 
 # Curl (Client-side)
-
-```
-cd example/client
-```
-
-All commands below should be executed at the path `example/client` .
 
 ## :couple: User
 
@@ -60,10 +52,11 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/adduser -
 
 ## :floppy_disk: Image
 
+<!--
 ### Upload image
 
 ```
-curl -i -X PUT http://localhost:5000/uploadimage -F who="tlink1jweegl733lmfdusfknelge8d82ftcfmrnm3r48" -F name="1.jpeg" -F file=@"images/1.jpeg" -F amount="5"
+curl -i -X PUT http://localhost:5000/uploadimage -F who="tlink1jweegl733lmfdusfknelge8d82ftcfmrnm3r48" -F name="1.jpeg" -F file=@"client_images/1.jpeg" -F amount="5"
 ```
 
 * `who`: Wallet address of uploader
@@ -83,36 +76,37 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/uploaddet
 * `description`: dictionary-like details about the image. It MUST includes `artist`, `agency`, `schedule`, `date` and `minted` fields.
 * `amount`: (optional) How many images you want to sell
 * `price`: (optional) Price of the image
+-->
 
 ### Get one image
 
 ```
-curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getimage -d '{"name": "1.jpeg"}'
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getimage -d '{"pk": "1"}'
 ```
 
-If saving file is needed, try:
+### Get multiple images
 
 ```
-curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getimage -d '{"name": "1.jpeg"}' > output.jpeg
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getallimages -d '{"startNum": 1, "endNum": 3}'
 ```
 
-**Notice**: Python Flask supports sending only one file at once.
-
-### Get detail of image
+*or*
 
 ```
-curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getdetail -d '{"name": "1.jpeg"}'
+curl -X POST http://localhost:5000/getallimages
 ```
 
-* `name`: Unique name of the file
-
-### Get multiple images' detail
+### Update detail: favorite
 
 ```
-curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getdetails -d '{"names": ["1.jpeg"]}'
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/updatefavorite -d '{"pk": "2"}'
 ```
 
-* `names`: The array of the multiple files' name
+*or*
+
+```
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/updatefavorite -d '{"pk": "2", "favor": true}'
+```
 
 ### Buy image
 
@@ -125,6 +119,7 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/buyimage 
 * `tokenIndex`: NFT token index
 * `price`: Price of the image. It MUST be same as seller-uploaded price.
 
+<!--
 ## :coffee: Product
 
 ### Upload product
@@ -166,6 +161,7 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getproduc
 ```
 
 * `names`: The array of the multiple products' name
+-->
 
 ## :wrench: Utils
 
