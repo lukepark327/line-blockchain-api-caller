@@ -16,17 +16,23 @@ The concrete example of LINE blockchain API caller.
 # Run (Server-side)
 
 ```
+cd example/server
 python app.py
 ```
 
 *or*
 
 ```
+cd example/server
 docker build -t fantopia:latest .
 docker run -d -p 5000:5000 fantopia
 ```
 
 # Curl (Client-side)
+
+```
+cd example/client
+```
 
 ## :couple: User
 

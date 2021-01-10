@@ -3,10 +3,13 @@ import time
 import hashlib
 import json
 
+from DB import DB
+
+import sys
+sys.path.append('../../caller/')
 from NFT import NFT
 from ST import ServiceToken
 from utils import get_transaction_info
-from DB import DB
 
 
 class Fantopia:
@@ -72,16 +75,16 @@ class Fantopia:
 
         # blockchain
         res = []
-        # res.append(self.nft.mint(
-        #     to_=sample1['owner_addr'],
-        #     name=sample1['pk'],
-        #     meta=json.dumps(sample1)
-        # ))
-        # res.append(self.nft.mint(
-        #         to_=sample2['owner_addr'],
-        #         name=sample2['pk'],
-        #         meta=json.dumps(sample2)
-        # ))
+        res.append(self.nft.mint(
+            to_=sample1['owner_addr'],
+            name=sample1['pk'],
+            meta=json.dumps(sample1)
+        ))
+        res.append(self.nft.mint(
+            to_=sample2['owner_addr'],
+            name=sample2['pk'],
+            meta=json.dumps(sample2)
+        ))
 
         return res
 
@@ -121,12 +124,12 @@ class Fantopia:
         tokenIndex: str,
         price: str
     ):
-        # meta = json.loads(self.nft.get_info(tokenIndex)['responseData']['meta'])
-        # artistAddress = meta['artist_addr']
+        meta = json.loads(self.nft.get_info(tokenIndex)['responseData']['meta'])
+        artistAddress = meta['artist_addr']
 
-        # price_ = meta['price']
-        # if price != price_:
-        #     return
+        price_ = meta['price']
+        if price != price_:
+            return
 
         price = int(price)
         for_artist, for_platform = int(price * self.artist_fee), int(price * self.platform_fee)
@@ -136,32 +139,32 @@ class Fantopia:
         for_artist, for_platform, for_receiver =\
             str(for_artist), str(for_platform), str(for_receiver)
 
-        # # blockchain
-        # res = []
-        # res.append(self.nft.transfer(
-        #     fromAddress=toAddress,
-        #     walletSecret=self.users[toAddress],
-        #     toAddress=fromAddress,
-        #     tokenIndex=tokenIndex
-        # ))
-        # res.append(self.st.transfer(
-        #     fromAddress=fromAddress,
-        #     walletSecret=self.users[fromAddress],
-        #     toAddress=toAddress,
-        #     amount=for_receiver
-        # ))
-        # res.append(self.st.transfer(
-        #     fromAddress=fromAddress,
-        #     walletSecret=self.users[fromAddress],
-        #     toAddress=artistAddress,
-        #     amount=for_artist
-        # ))
-        # res.append(self.st.transfer(
-        #     fromAddress=fromAddress,
-        #     walletSecret=self.users[fromAddress],
-        #     toAddress=self.ownerAddress,
-        #     amount=for_platform
-        # ))
+        # blockchain
+        res = []
+        res.append(self.nft.transfer(
+            fromAddress=toAddress,
+            walletSecret=self.users[toAddress],
+            toAddress=fromAddress,
+            tokenIndex=tokenIndex
+        ))
+        res.append(self.st.transfer(
+            fromAddress=fromAddress,
+            walletSecret=self.users[fromAddress],
+            toAddress=toAddress,
+            amount=for_receiver
+        ))
+        res.append(self.st.transfer(
+            fromAddress=fromAddress,
+            walletSecret=self.users[fromAddress],
+            toAddress=artistAddress,
+            amount=for_artist
+        ))
+        res.append(self.st.transfer(
+            fromAddress=fromAddress,
+            walletSecret=self.users[fromAddress],
+            toAddress=self.ownerAddress,
+            amount=for_platform
+        ))
 
         # update DB
         # TBA
