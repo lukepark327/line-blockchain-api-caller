@@ -6,106 +6,7 @@ import json
 from NFT import NFT
 from ST import ServiceToken
 from utils import get_transaction_info
-
-
-class ImageServer:
-    def __init__(
-        self,
-        serverBaseURI: str = 'server_images'
-    ):
-        self.serverBaseURI = serverBaseURI
-
-        # (name, id) => {URI, description, price, hash}
-        self.images = dict()
-
-    def upload_image(
-        self,
-        name: str,  # file_name.extension
-        image_bytes,
-        description: dict = None,
-        number=0,
-        price=None
-    ):
-        # Save the image at server
-        _URI = self.serverBaseURI + '/' + name
-        with open(_URI, 'wb') as f:
-            f.write(image_bytes)
-
-        _description = description
-        _price = str(price) if price is not None else None
-        _hash_value = self._hash(name)
-
-        self.images[(name, str(number))] = {
-            'URI': _URI,
-            'description': _description,
-            'price': _price,
-            'hash': _hash_value
-        }
-
-    def _hash(self, name):
-        _URI = self.serverBaseURI + '/' + name
-        with open(_URI, 'rb') as f:
-            _image_bytes = f.read()
-
-        _contents = base64.b64encode(_image_bytes)
-        return hashlib.sha256(_contents).hexdigest()
-
-    # Setter
-
-    def set_description(self, name, new_description: dict, number=0):
-        self.images[(name, str(number))]['description'] = new_description
-
-    def set_price(self, name, new_price, number=0):
-        self.images[(name, str(number))]['price'] = str(new_price)
-
-    # Getter
-
-    def get_image_bytes(self, name, number=0):
-        _URI = self.images[(name, str(number))]['URI']
-        with open(_URI, 'rb') as f:
-            _image_bytes = f.read()
-        return _image_bytes
-
-    def get_description(self, name, number=0):
-        return self.images[(name, str(number))]['description']
-
-    def get_price(self, name, number=0):
-        return self.images[(name, str(number))]['price']
-
-    def get_hash(self, name, number=0):
-        return self.images[(name, str(number))]['hash']
-
-
-class ProductServer:
-    def __init__(
-        self
-    ):
-        self.products = dict()
-
-    def upload_product(
-        self,
-        name: str,
-        nft_number: str,
-        nft_name: str,
-    ):
-        self.products['name'] = {
-            'nft_number': nft_number,
-            'nft_name': nft_name
-        }
-
-    def get_product(
-        self,
-        name: str
-    ):
-        return self.products['name']
-
-    def get_nft_detail(
-        self,
-        img_server: ImageServer,
-        name: str
-    ):
-        _name = self.products['name']['nft_name']
-        return img_server.get_description(_name)
+from DB import DB
 
 
 class Fantopia:
@@ -129,8 +30,60 @@ class Fantopia:
 
         self.config = config
 
-        self.img_server = ImageServer(serverBaseURI='server_images')
-        self.product_server = ProductServer()
+        self.DB = DB()
+        print(self.insertSamples())
+
+    def insertSamples(self):
+        sample1 = {
+            "pk": "1",
+            "type": "image",
+            "img_url": "https://w.namu.la/s/cc411f2978e4e15799cd982f19b5519012e1195f7ab39bd094d5b5098973d301149abfe1e394459909951f2bc13575d93f3f1e93dfb5ae6c7525dd4d840a2cb6f345c8e19ec2e259e5e46d98a23787d9e2f3f0bbb1b8cb33fa3e73b8de9844b9b16718fa3cb8dbb273aa547ae550f9b3",
+            "schedule": "2020 아이유 부산콘서트",
+            "description": "오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n",
+            "is_favorite": True,
+            "price": "0.324",
+            "serial_num": "1000000100000019",
+            "artist": "아이유",
+            "artist_addr": "tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg",
+            "owner_id": "clze01",
+            "owner_addr": "tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd",
+            "taken_date": "2020.11.24",
+            "minted_date": "2020.12.02"
+        }
+        sample2 = {
+            "pk": "2",
+            "type": "product",
+            "img_url": "https://w.namu.la/s/cc411f2978e4e15799cd982f19b5519012e1195f7ab39bd094d5b5098973d301149abfe1e394459909951f2bc13575d93f3f1e93dfb5ae6c7525dd4d840a2cb6f345c8e19ec2e259e5e46d98a23787d9e2f3f0bbb1b8cb33fa3e73b8de9844b9b16718fa3cb8dbb273aa547ae550f9b3",
+            "schedule": "2019 아이유 부산콘서트",
+            "description": "오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n",
+            "is_favorite": False,
+            "price": "0.324",
+            "serial_num": "1000000100000018",
+            "artist": "아이유",
+            "artist_addr": "tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg",
+            "owner_id": "clze01",
+            "owner_addr": "tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd",
+            "taken_date": "2020.11.24",
+            "minted_date": "2020.12.02"
+        }
+
+        self.DB.table[self.DB._getPkIndex()] = sample1
+        self.DB.table[self.DB._getPkIndex()] = sample2
+
+        # blockchain
+        res = []
+        res.append(self.nft.mint(
+            to_=sample1['owner_addr'],
+            name=sample1['pk'],
+            meta=json.dumps(sample1)
+        ))
+        res.append(self.nft.mint(
+            to_=sample2['owner_addr'],
+            name=sample2['pk'],
+            meta=json.dumps(sample2)
+        ))
+
+        return res
 
     # def change_owner(self):
     #     pass
@@ -147,146 +100,19 @@ class Fantopia:
     def is_user(self, who: str):
         return who in self.users
 
-    def upload_image(
-        self,
-        who: str,
-        name: str,  # file_name.extension
-        image_bytes,
-        description: dict = None,
-        amount=1,
-        price=None
-    ):
-        # condition: only user can upload image(s)
-        if not self.is_user(who):
-            return
+    # DB
 
-        res = []
+    # deprecated
+    # def upload(self): pass
 
-        # mint NFT
-        for i in range(amount):
-            self.img_server.upload_image(
-                name, image_bytes, description, i, price
-            )
+    def getImage(self, primaryKey: str):
+        return self.DB.getImage(primaryKey)
 
-            _hash = self.img_server.get_hash(name=name)
-            _description = description
-            _price = price
+    def getAllImages(self, startNum=0, endNum=100):
+        return self.DB.getAllImages(startNum=startNum, endNum=endNum)
 
-            if (_description is not None) and (_price is not None):
-                res.append(
-                    self.nft.mint(
-                        to_=who,
-                        name=name,
-                        meta=json.dumps({
-                            'hash': _hash,
-                            # 'SN'
-                            'artist': _description['artist'],
-                            'agency': _description['agency'],
-                            'schedule': _description['schedule'],
-                            'date': _description['date'],
-                            'minted': _description['minted'],
-                            # 'owner'
-                            'price': _price
-                        })
-                    )
-                )
-            elif (_description is not None) and (_price is None):
-                res.append(
-                    self.nft.mint(
-                        to_=who,
-                        name=name,
-                        meta=json.dumps({
-                            'hash': _hash,
-                            # 'SN'
-                            'artist': _description['artist'],
-                            'agency': _description['agency'],
-                            'schedule': _description['schedule'],
-                            'date': _description['date'],
-                            'minted': _description['minted']
-                            # 'owner'
-                        })
-                    )
-                )
-            elif (_description is None) and (_price is not None):
-                res.append(
-                    self.nft.mint(
-                        to_=who,
-                        name=name,
-                        meta=json.dumps({
-                            'hash': _hash,
-                            'price': _price
-                        })
-                    )
-                )
-            else:  # (_description is None) and (_price is None)
-                res.append(
-                    self.nft.mint(
-                        to_=who,
-                        name=name,
-                        meta=json.dumps({
-                            'hash': _hash
-                        })
-                    )
-                )
-
-        return res
-
-    def upload_detail(
-        self,
-        number: str,  # NFT number
-        name: str,
-        new_description: dict,
-        amount=1,
-        price=None
-    ):
-        res = []
-
-        # update NFT
-        for i in range(amount):
-            self.img_server.set_description(
-                name, new_description, i
-            )
-
-            _hash = self.img_server.get_hash(name=name)
-            _description = new_description
-            _price = self.img_server.get_price(name=name) or str(price)
-
-            if _price is None:
-                raise Exception('price MUST not be None')
-
-            res.append(
-                self.nft.update_info(
-                    number=number,
-                    name=name,
-                    meta=json.dumps({
-                        'hash': _hash,
-                        # 'SN'
-                        'artist': _description['artist'],
-                        'agency': _description['agency'],
-                        'schedule': _description['schedule'],
-                        'date': _description['date'],
-                        'minted': _description['minted'],
-                        # 'owner'
-                        'price': _price
-                    })
-                )
-            )
-
-        return res
-
-    def upload_product(
-        self,
-        name: str,
-        nft_number: str,
-        nft_name: str,
-    ):
-        self.product_server.upload_product(name, nft_number, nft_name)
-
-    def get_product(self, name: str):
-        return self.product_server.get_product(name)
-
-    def get_nft_detail(self, name: str):
-        return self.product_server.get_nft_detail(self.img_server, name)
+    def updateFavorite(self, primaryKey: str, favor=True):
+        self.DB.updateFavorite(primaryKey, favor)
 
     def buy(
         self,
@@ -296,61 +122,53 @@ class Fantopia:
         price: str
     ):
         meta = json.loads(self.nft.get_info(tokenIndex)['responseData']['meta'])
-        artistAddress = str(meta['artist'])
-        price_ = str(meta['price'])
+        artistAddress = meta['artist_addr']
 
+        price_ = meta['price']
         if price != price_:
             return
 
         price = int(price)
-        for_artist = int(price * self.artist_fee)
-        for_platform = int(price * self.platform_fee)
+        for_artist, for_platform = int(price * self.artist_fee), int(price * self.platform_fee)
         for_receiver = int(price - for_artist - for_platform)
 
         price = str(price)
-        for_artist = str(for_artist)
-        for_platform = str(for_platform)
-        for_receiver = str(for_receiver)
+        for_artist, for_platform, for_receiver =\
+            str(for_artist), str(for_platform), str(for_receiver)
 
+        # blockchain
         res = []
+        res.append(self.nft.transfer(
+            fromAddress=toAddress,
+            walletSecret=self.users[toAddress],
+            toAddress=fromAddress,
+            tokenIndex=tokenIndex
+        ))
+        res.append(self.st.transfer(
+            fromAddress=fromAddress,
+            walletSecret=self.users[fromAddress],
+            toAddress=toAddress,
+            amount=for_receiver
+        ))
+        res.append(self.st.transfer(
+            fromAddress=fromAddress,
+            walletSecret=self.users[fromAddress],
+            toAddress=artistAddress,
+            amount=for_artist
+        ))
+        res.append(self.st.transfer(
+            fromAddress=fromAddress,
+            walletSecret=self.users[fromAddress],
+            toAddress=self.ownerAddress,
+            amount=for_platform
+        ))
 
-        res.append(
-            self.st.transfer(
-                fromAddress=fromAddress,
-                walletSecret=self.users[fromAddress],
-                toAddress=toAddress,
-                amount=for_receiver
-            )
-        )
-        res.append(
-            self.nft.transfer(
-                fromAddress=toAddress,
-                walletSecret=self.users[toAddress],
-                toAddress=fromAddress,
-                tokenIndex=tokenIndex
-            )
-        )
-        res.append(
-            self.st.transfer(
-                fromAddress=fromAddress,
-                walletSecret=self.users[fromAddress],
-                toAddress=artistAddress,
-                amount=for_artist
-            )
-        )
-        res.append(
-            self.st.transfer(
-                fromAddress=fromAddress,
-                walletSecret=self.users[fromAddress],
-                toAddress=self.ownerAddress,
-                amount=for_platform
-            )
-        )
+        # update DB
+        # TBA
 
-        return res
-
-    def collection(self, who: str):
-        return self.users[who]
+        # return txs
+        # TBA
+        return 'DCD0B2D32E9329D77AA642A55DC10469A876767493D2F60254A70E4DCD099202'
 
 
 if __name__ == "__main__":
@@ -377,31 +195,6 @@ if __name__ == "__main__":
     # Add user
     fantopia.add_user(user_A)
     fantopia.add_user(user_B)
-
-    # Upload image
-    # description must have 'artist' & 'price' field
-    # which formal one is the wallet address of the artist.
-    name = '1.jpeg'
-    with open('client_images/' + name, 'rb') as f:
-        image_bytes = f.read()
-
-    res = fantopia.upload_image(
-        who=user_A['address'],
-        name=name,
-        image_bytes=image_bytes,
-        description={
-            # 'SN':
-            'artist': artist['address'],  # 'IU(01)'
-            'agency': 'Loen Entertainment',
-            'schedule': '2019 IU concert',
-            'date': '12/01/2019',
-            'minted': '01/12/2020'
-            # 'owner':
-        },
-        amount=5,
-        price=10000
-    )
-    pprint(res)
 
     # Buy image
     res = fantopia.buy(

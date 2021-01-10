@@ -52,6 +52,7 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/adduser -
 
 ## :floppy_disk: Image
 
+<!--
 ### Upload image
 
 ```
@@ -75,36 +76,37 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/uploaddet
 * `description`: dictionary-like details about the image. It MUST includes `artist`, `agency`, `schedule`, `date` and `minted` fields.
 * `amount`: (optional) How many images you want to sell
 * `price`: (optional) Price of the image
+-->
 
 ### Get one image
 
 ```
-curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getimage -d '{"name": "1.jpeg"}'
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getimage -d '{"pk": "1"}'
 ```
 
-If saving file is needed, try:
+### Get multiple images
 
 ```
-curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getimage -d '{"name": "1.jpeg"}' > output.jpeg
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getallimages -d '{"startNum": 1, "endNum": 3}'
 ```
 
-**Notice**: Python Flask supports sending only one file at once.
-
-### Get detail of image
+*or*
 
 ```
-curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getdetail -d '{"name": "1.jpeg"}'
+curl -X POST http://localhost:5000/getallimages
 ```
 
-* `name`: Unique name of the file
-
-### Get multiple images' detail
+### Update detail: favorite
 
 ```
-curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getdetails -d '{"names": ["1.jpeg"]}'
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/updatefavorite -d '{"pk": "2"}'
 ```
 
-* `names`: The array of the multiple files' name
+*or*
+
+```
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/updatefavorite -d '{"pk": "2", "favor": true}'
+```
 
 ### Buy image
 
@@ -117,6 +119,7 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/buyimage 
 * `tokenIndex`: NFT token index
 * `price`: Price of the image. It MUST be same as seller-uploaded price.
 
+<!--
 ## :coffee: Product
 
 ### Upload product
@@ -158,6 +161,7 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getproduc
 ```
 
 * `names`: The array of the multiple products' name
+-->
 
 ## :wrench: Utils
 

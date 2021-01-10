@@ -39,46 +39,42 @@ def addartist():
     return 'Success'
 
 
-@app.route('/uploadimage', methods=['POST', 'PUT'])
-def uploadimage():
-    _who = request.form['who']
-    _name = request.form['name']
-    _file = request.files['file']
-    _amount = 1 if 'amount' not in request.form else int(request.form['amount'])
-    _price = None if 'price' not in request.form else int(request.form['price'])
+# depricated
+# @app.route('/uploadimage', methods=['POST', 'PUT'])
+# def uploadimage():
+#     _who = request.form['who']
+#     _name = request.form['name']
+#     _file = request.files['file']
+#     _amount = 1 if 'amount' not in request.form else int(request.form['amount'])
+#     _price = None if 'price' not in request.form else int(request.form['price'])
 
-    res = fantopia.upload_image(
-        who=_who,
-        name=_name,
-        image_bytes=_file.read(),
-        # description=_discription
-        amount=_amount,
-        price=_price
-    )
-    pprint(res)
+#     res = fantopia.upload_image(
+#         who=_who,
+#         name=_name,
+#         image_bytes=_file.read(),
+#         # description=_description
+#         amount=_amount,
+#         price=_price
+#     )
+#     pprint(res)
 
-    return json.dumps(res) or 'Success'
+#     return json.dumps(res) or 'Success'
 
 
-@app.route('/uploaddetail', methods=['POST'])
-def uploaddetail():
-    params = json.loads(request.get_data(), encoding='utf-8')
-    if len(params) == 0:
-        return 'No parameter'
+# # depricated
+# @app.route('/uploadproduct', methods=['POST'])
+# def uploadproduct():
+#     params = json.loads(request.get_data(), encoding='utf-8')
+#     if len(params) == 0:
+#         return 'No parameter'
 
-    _amount = 1 if 'amount' not in params else int(params['amount'])
-    _price = None if 'price' not in params else int(params['price'])
+#     fantopia.upload_product(
+#         name=params['name'],
+#         nft_number=params['nft_number'],
+#         nft_name=params['nft_name'],
+#     )
 
-    res = fantopia.upload_detail(
-        number=params['tokenIndex'],
-        name=params['name'],
-        new_description=params['description'],
-        amount=_amount,
-        price=_price
-    )
-    pprint(res)
-
-    return json.dumps(res) or 'Success'
+#     return 'Success'
 
 
 @app.route('/getimage', methods=['POST'])
@@ -87,47 +83,41 @@ def getimage():
     if len(params) == 0:
         return 'No parameter'
 
-    serverBaseURI = 'server_images' if 'serverBaseURI' not in params else params['serverBaseURI']
-    name = params['name']
+    pk = params['pk']
 
-    return send_file(serverBaseURI + '/' + name, as_attachment=True)
+    res = fantopia.getImage(pk)
+
+    return json.dumps(res)
 
 
-@app.route('/getdetail', methods=['POST'])
+@app.route('/getallimages', methods=['POST'])
 def getdetail():
+    params = {}
+    try:
+        params = json.loads(request.get_data(), encoding='utf-8')
+    except:
+        pass
+
+    startNum = params['startNum'] if 'startNum' in params else 0
+    endNum = params['endNum'] if 'endNum' in params else 100
+
+    res = fantopia.getAllImages(startNum=startNum, endNum=endNum)
+
+    return json.dumps(res)
+
+
+@app.route('/updatefavorite', methods=['POST'])
+def updatefavorite():
     params = json.loads(request.get_data(), encoding='utf-8')
     if len(params) == 0:
         return 'No parameter'
 
-    name = params['name']
+    pk = params['pk']
+    favor = params['favor'] if 'favor' in params else True
 
-    res = []
+    fantopia.updateFavorite(pk, favor)
 
-    res.append(fantopia.img_server.get_description(
-        name=name
-        # number=i,
-    ))
-
-    return json.dumps(res) or 'Success'
-
-
-@app.route('/getdetails', methods=['POST'])
-def getdetails():
-    params = json.loads(request.get_data(), encoding='utf-8')
-    if len(params) == 0:
-        return 'No parameter'
-
-    names = params['names']
-
-    res = []
-
-    for name in names:
-        res.append(fantopia.img_server.get_description(
-            name=name
-            # number=i,
-        ))
-
-    return json.dumps(res) or 'Success'
+    return 'Success'
 
 
 @app.route('/buyimage', methods=['POST'])
@@ -142,70 +132,6 @@ def buyimage():
         tokenIndex=params['tokenIndex'],
         price=params['price']
     )
-    pprint(res)
-
-    return json.dumps(res) or 'Success'
-
-
-@app.route('/uploadproduct', methods=['POST'])
-def uploadproduct():
-    params = json.loads(request.get_data(), encoding='utf-8')
-    if len(params) == 0:
-        return 'No parameter'
-
-    fantopia.upload_product(
-        name=params['name'],
-        nft_number=params['nft_number'],
-        nft_name=params['nft_name'],
-    )
-
-    return 'Success'
-
-
-@app.route('/getproductimage', methods=['POST'])
-def getproduct():
-    params = json.loads(request.get_data(), encoding='utf-8')
-    if len(params) == 0:
-        return 'No parameter'
-
-    info = fantopia.get_product(
-        name=params['name']
-    )
-    _name = info['nft_name']
-
-    serverBaseURI = 'server_images' if 'serverBaseURI' not in params else params['serverBaseURI']
-
-    return send_file(serverBaseURI + '/' + _name, as_attachment=True)
-
-
-@app.route('/getproductdetail', methods=['POST'])
-def getproductdetail():
-    params = json.loads(request.get_data(), encoding='utf-8')
-    if len(params) == 0:
-        return 'No parameter'
-
-    res = fantopia.get_nft_detail(
-        name=params['name']
-    )
-    pprint(res)
-
-    return json.dumps(res) or 'Success'
-
-
-@app.route('/getproductdetails', methods=['POST'])
-def getproductdetails():
-    params = json.loads(request.get_data(), encoding='utf-8')
-    if len(params) == 0:
-        return 'No parameter'
-
-    names = params['names']
-
-    res = []
-
-    for name in names:
-        res.append(fantopia.get_nft_detail(
-            name=name
-        ))
     pprint(res)
 
     return json.dumps(res) or 'Success'
@@ -250,32 +176,6 @@ def test():
     # Add user
     fantopia.add_user(user_A)
     fantopia.add_user(user_B)
-
-    # Upload image
-    # description must have 'artist' & 'price' field
-    # which formal one is the wallet address of the artist.
-    name = '1.jpeg'
-    with open('client_images/' + name, 'rb') as f:
-        image_bytes = f.read()
-
-    res = fantopia.upload_image(
-        who=user_A['address'],
-        name=name,
-        image_bytes=image_bytes,
-        description={
-            # 'SN':
-            'artist': artist['address'],  # 'IU(01)'
-            'agency': 'Loen Entertainment',
-            'schedule': '2019 IU concert',
-            'date': '12/01/2019',
-            'minted': '01/12/2020'
-            # 'owner':
-        },
-        amount=5,
-        price=10000
-    )
-    pprint(res)
-    ress.append(res)
 
     # Buy image
     res = fantopia.buy(
