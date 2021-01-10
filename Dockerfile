@@ -6,4 +6,5 @@ RUN apt-get install -y --no-install-recommends python3.6 python3.6-dev python3-p
 COPY . /app
 WORKDIR /app
 RUN pip3 install -r requirements.txt
+WORKDIR ./example/server
 CMD python3.6 app.py
