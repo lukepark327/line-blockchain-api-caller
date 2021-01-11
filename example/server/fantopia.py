@@ -37,54 +37,110 @@ class Fantopia:
         print(self.insertSamples())
 
     def insertSamples(self):
-        sample1 = {
-            "pk": "1",
-            "type": "image",
-            "img_url": "https://w.namu.la/s/cc411f2978e4e15799cd982f19b5519012e1195f7ab39bd094d5b5098973d301149abfe1e394459909951f2bc13575d93f3f1e93dfb5ae6c7525dd4d840a2cb6f345c8e19ec2e259e5e46d98a23787d9e2f3f0bbb1b8cb33fa3e73b8de9844b9b16718fa3cb8dbb273aa547ae550f9b3",
-            "schedule": "2020 아이유 부산콘서트",
-            "description": "오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n",
-            "is_favorite": True,
-            "price": "0.324",
-            "serial_num": "1000000100000019",
-            "artist": "아이유",
-            "artist_addr": "tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg",
-            "owner_id": "clze01",
-            "owner_addr": "tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd",
-            "taken_date": "2020.11.24",
-            "minted_date": "2020.12.02"
-        }
-        sample2 = {
-            "pk": "2",
-            "type": "product",
-            "img_url": "https://w.namu.la/s/cc411f2978e4e15799cd982f19b5519012e1195f7ab39bd094d5b5098973d301149abfe1e394459909951f2bc13575d93f3f1e93dfb5ae6c7525dd4d840a2cb6f345c8e19ec2e259e5e46d98a23787d9e2f3f0bbb1b8cb33fa3e73b8de9844b9b16718fa3cb8dbb273aa547ae550f9b3",
-            "schedule": "2019 아이유 부산콘서트",
-            "description": "오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n",
-            "is_favorite": False,
-            "price": "0.324",
-            "serial_num": "1000000100000018",
-            "artist": "아이유",
-            "artist_addr": "tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg",
-            "owner_id": "clze01",
-            "owner_addr": "tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd",
-            "taken_date": "2020.11.24",
-            "minted_date": "2020.12.02"
-        }
+        image1 = {'pk': '1', 'type': 'image', 'img_url': 'assets/images/characters/character1.jpg', 'schedule': "2020 아이유 부산콘서트", 'description': '오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n',
+                'is_favorite': True, 'price': '0.324', 'serial_num': '1000000100000019', 'artist': '아이유', 'artist_addr': 'tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg',
+                'owner_id': 'clze01', 'owner_addr': 'tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd', 'taken_date': '2020.11.24', 'minted_date': '2020.12.02'}
+        image2 = {'pk': '2', 'type': 'image', 'img_url': 'assets/images/characters/character2.jpg', 'schedule': "2020 아이유 부산콘서트", 'description': '오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n',
+                'is_favorite': False, 'price': '0.324', 'serial_num': '1000000100000019', 'artist': '아이유', 'artist_addr': 'tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg',
+                'owner_id': 'clze01', 'owner_addr': 'tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd', 'taken_date': '2020.11.24', 'minted_date': '2020.12.02'}
+        image3 = {'pk': '3', 'type': 'image', 'img_url': 'assets/images/characters/character3.jpeg', 'schedule': "2020 아이유 부산콘서트", 'description': '오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n',
+                'is_favorite': False, 'price': '0.324', 'serial_num': '1000000100000019', 'artist': '아이유', 'artist_addr': 'tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg',
+                'owner_id': 'clze01', 'owner_addr': 'tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd', 'taken_date': '2020.11.24', 'minted_date': '2020.12.02'}
+        image4 = {'pk': '4', 'type': 'image', 'img_url': 'assets/images/characters/character4.jpg', 'schedule': "2020 아이유 부산콘서트", 'description': '오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n',
+                'is_favorite': False, 'price': '0.324', 'serial_num': '1000000100000019', 'artist': '아이유', 'artist_addr': 'tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg',
+                'owner_id': 'clze01', 'owner_addr': 'tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd', 'taken_date': '2020.11.24', 'minted_date': '2020.12.02'}
+        image5 = {'pk': '5', 'type': 'image', 'img_url': 'assets/images/characters/character5.jpg', 'schedule': "2020 아이유 부산콘서트", 'description': '오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n',
+                'is_favorite': False, 'price': '0.324', 'serial_num': '1000000100000019', 'artist': '아이유', 'artist_addr': 'tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg',
+                'owner_id': 'clze01', 'owner_addr': 'tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd', 'taken_date': '2020.11.24', 'minted_date': '2020.12.02'}
+        image6 = {'pk': '6', 'type': 'image', 'img_url': 'assets/images/characters/character6.jpg', 'schedule': "2020 아이유 부산콘서트", 'description': '오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n',
+                'is_favorite': False, 'price': '0.324', 'serial_num': '1000000100000019', 'artist': '아이유', 'artist_addr': 'tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg',
+                'owner_id': 'clze01', 'owner_addr': 'tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd', 'taken_date': '2020.11.24', 'minted_date': '2020.12.02'}
+        image7 = {'pk': '7', 'type': 'image', 'img_url': 'assets/images/characters/character7.jpg', 'schedule': "2020 아이유 부산콘서트", 'description': '오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n',
+                'is_favorite': False, 'price': '0.324', 'serial_num': '1000000100000019', 'artist': '아이유', 'artist_addr': 'tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg',
+                'owner_id': 'clze01', 'owner_addr': 'tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd', 'taken_date': '2020.11.24', 'minted_date': '2020.12.02'}
+        image8 = {'pk': '8', 'type': 'image', 'img_url': 'assets/images/characters/character8.jpg', 'schedule': "2020 아이유 부산콘서트", 'description': '오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n',
+                'is_favorite': False, 'price': '0.324', 'serial_num': '1000000100000019', 'artist': '아이유', 'artist_addr': 'tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg',
+                'owner_id': 'clze01', 'owner_addr': 'tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd', 'taken_date': '2020.11.24', 'minted_date': '2020.12.02'}
+        image9 = {'pk': '9', 'type': 'image', 'img_url': 'assets/images/characters/character9.jpg', 'schedule': "2020 아이유 부산콘서트", 'description': '오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n',
+                'is_favorite': False, 'price': '0.324', 'serial_num': '1000000100000019', 'artist': '아이유', 'artist_addr': 'tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg',
+                'owner_id': 'clze01', 'owner_addr': 'tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd', 'taken_date': '2020.11.24', 'minted_date': '2020.12.02'}
+        image10 = {'pk': '10', 'type': 'image', 'img_url': 'assets/images/characters/character10.jpg', 'schedule': "2020 아이유 부산콘서트", 'description': '오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n',
+                'is_favorite': False, 'price': '0.324', 'serial_num': '1000000100000019', 'artist': '아이유', 'artist_addr': 'tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg',
+                'owner_id': 'clze01', 'owner_addr': 'tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd', 'taken_date': '2020.11.24', 'minted_date': '2020.12.02'}
+        item1 = {'pk': '11', 'type': 'product', 'img_url': 'assets/images/items/item1.jpeg', 'schedule': "2020 아이유 부산콘서트", 'description': '오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n',
+                'is_favorite': False, 'price': '0.324', 'serial_num': '1000000100000019', 'artist': '아이유', 'artist_addr': 'tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg',
+                'owner_id': 'clze01', 'owner_addr': 'tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd', 'taken_date': '2020.11.24', 'minted_date': '2020.12.02'}
+        item2 = {'pk': '12', 'type': 'product', 'img_url': 'assets/images/items/item2.jpeg', 'schedule': "2020 아이유 부산콘서트", 'description': '오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n',
+                'is_favorite': False, 'price': '0.324', 'serial_num': '1000000100000019', 'artist': '아이유', 'artist_addr': 'tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg',
+                'owner_id': 'clze01', 'owner_addr': 'tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd', 'taken_date': '2020.11.24', 'minted_date': '2020.12.02'}
+        item3 = {'pk': '13', 'type': 'product', 'img_url': 'assets/images/items/item3.jpeg', 'schedule': "2020 아이유 부산콘서트", 'description': '오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n',
+                'is_favorite': False, 'price': '0.324', 'serial_num': '1000000100000019', 'artist': '아이유', 'artist_addr': 'tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg',
+                'owner_id': 'clze01', 'owner_addr': 'tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd', 'taken_date': '2020.11.24', 'minted_date': '2020.12.02'}
+        item4 = {'pk': '14', 'type': 'product', 'img_url': 'assets/images/items/item4.jpeg', 'schedule': "2020 아이유 부산콘서트", 'description': '오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n',
+                'is_favorite': False, 'price': '0.324', 'serial_num': '1000000100000019', 'artist': '아이유', 'artist_addr': 'tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg',
+                'owner_id': 'clze01', 'owner_addr': 'tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd', 'taken_date': '2020.11.24', 'minted_date': '2020.12.02'}
+        item5 = {'pk': '15', 'type': 'product', 'img_url': 'assets/images/items/item5.jpeg', 'schedule': "2020 아이유 부산콘서트", 'description': '오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n',
+                'is_favorite': False, 'price': '0.324', 'serial_num': '1000000100000019', 'artist': '아이유', 'artist_addr': 'tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg',
+                'owner_id': 'clze01', 'owner_addr': 'tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd', 'taken_date': '2020.11.24', 'minted_date': '2020.12.02'}
+        item6 = {'pk': '16', 'type': 'product', 'img_url': 'assets/images/items/item6.jpeg', 'schedule': "2020 아이유 부산콘서트", 'description': '오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n',
+                'is_favorite': False, 'price': '0.324', 'serial_num': '1000000100000019', 'artist': '아이유', 'artist_addr': 'tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg',
+                'owner_id': 'clze01', 'owner_addr': 'tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd', 'taken_date': '2020.11.24', 'minted_date': '2020.12.02'}
+        item7 = {'pk': '17', 'type': 'product', 'img_url': 'assets/images/items/item7.jpeg', 'schedule': "2020 아이유 부산콘서트", 'description': '오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n',
+                'is_favorite': False, 'price': '0.324', 'serial_num': '1000000100000019', 'artist': '아이유', 'artist_addr': 'tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg',
+                'owner_id': 'clze01', 'owner_addr': 'tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd', 'taken_date': '2020.11.24', 'minted_date': '2020.12.02'}
+        item8 = {'pk': '18', 'type': 'product', 'img_url': 'assets/images/items/item8.jpeg', 'schedule': "2020 아이유 부산콘서트", 'description': '오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n',
+                'is_favorite': False, 'price': '0.324', 'serial_num': '1000000100000019', 'artist': '아이유', 'artist_addr': 'tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg',
+                'owner_id': 'clze01', 'owner_addr': 'tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd', 'taken_date': '2020.11.24', 'minted_date': '2020.12.02'}
+        item9 = {'pk': '19', 'type': 'product', 'img_url': 'assets/images/items/item9.jpeg', 'schedule': "2020 아이유 부산콘서트", 'description': '오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n',
+                'is_favorite': False, 'price': '0.324', 'serial_num': '1000000100000019', 'artist': '아이유', 'artist_addr': 'tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg',
+                'owner_id': 'clze01', 'owner_addr': 'tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd', 'taken_date': '2020.11.24', 'minted_date': '2020.12.02'}
+        item10 = {'pk': '20', 'type': 'product', 'img_url': 'assets/images/items/item10.jpeg', 'schedule': "2020 아이유 부산콘서트", 'description': '오막포 (캐논의 ‘EOS 5D 마크4’ 카메라) + 새아빠 (EF70-200mm F2.8L IS II USM)로 촬영한 고화질 사진입니다.\n\n2019 아이유 단독 콘서트 C2 구역 중앙에서 촬영하여 흔들림 없는 희귀 정면 사진입니다. 아이유, 장발, 콘서트. 진짜 왜 안사,,?\n',
+                'is_favorite': False, 'price': '0.324', 'serial_num': '1000000100000019', 'artist': '아이유', 'artist_addr': 'tlink1jr4z9698hzuued2alrc2t7vrd03c87mh8lcvcg',
+                'owner_id': 'clze01', 'owner_addr': 'tlink19ejywqvr8caj7yl43sjfqvlw9xjh54wgq5fmtd', 'taken_date': '2020.11.24', 'minted_date': '2020.12.02'}
 
-        self.DB.table[self.DB._getPkIndex()] = sample1
-        self.DB.table[self.DB._getPkIndex()] = sample2
+        self.DB.table[self.DB._getPkIndex()] = image1
+        self.DB.table[self.DB._getPkIndex()] = image2
+        self.DB.table[self.DB._getPkIndex()] = image3
+        self.DB.table[self.DB._getPkIndex()] = image4
+        self.DB.table[self.DB._getPkIndex()] = image5
+        self.DB.table[self.DB._getPkIndex()] = image6
+        self.DB.table[self.DB._getPkIndex()] = image7
+        self.DB.table[self.DB._getPkIndex()] = image8
+        self.DB.table[self.DB._getPkIndex()] = image9
+        self.DB.table[self.DB._getPkIndex()] = image10
+        self.DB.table[self.DB._getPkIndex()] = item1
+        self.DB.table[self.DB._getPkIndex()] = item2
+        self.DB.table[self.DB._getPkIndex()] = item3
+        self.DB.table[self.DB._getPkIndex()] = item4
+        self.DB.table[self.DB._getPkIndex()] = item5
+        self.DB.table[self.DB._getPkIndex()] = item6
+        self.DB.table[self.DB._getPkIndex()] = item7
+        self.DB.table[self.DB._getPkIndex()] = item8
+        self.DB.table[self.DB._getPkIndex()] = item9
+        self.DB.table[self.DB._getPkIndex()] = item10
 
         # blockchain
         res = []
-        res.append(self.nft.mint(
-            to_=sample1['owner_addr'],
-            name=sample1['pk'],
-            meta=json.dumps(sample1)
-        ))
-        res.append(self.nft.mint(
-            to_=sample2['owner_addr'],
-            name=sample2['pk'],
-            meta=json.dumps(sample2)
-        ))
+        res.append(self.nft.mint(to_=image1['owner_addr'], name=image1['pk'], meta=json.dumps(image1)))
+        res.append(self.nft.mint(to_=image2['owner_addr'], name=image2['pk'], meta=json.dumps(image2)))
+        res.append(self.nft.mint(to_=image3['owner_addr'], name=image3['pk'], meta=json.dumps(image3)))
+        res.append(self.nft.mint(to_=image4['owner_addr'], name=image4['pk'], meta=json.dumps(image4)))
+        res.append(self.nft.mint(to_=image5['owner_addr'], name=image5['pk'], meta=json.dumps(image5)))
+        res.append(self.nft.mint(to_=image6['owner_addr'], name=image6['pk'], meta=json.dumps(image6)))
+        res.append(self.nft.mint(to_=image7['owner_addr'], name=image7['pk'], meta=json.dumps(image7)))
+        res.append(self.nft.mint(to_=image8['owner_addr'], name=image8['pk'], meta=json.dumps(image8)))
+        res.append(self.nft.mint(to_=image9['owner_addr'], name=image9['pk'], meta=json.dumps(image9)))
+        res.append(self.nft.mint(to_=image10['owner_addr'], name=image10['pk'], meta=json.dumps(image10)))
+        res.append(self.nft.mint(to_=item1['owner_addr'], name=item1['pk'], meta=json.dumps(item1)))
+        res.append(self.nft.mint(to_=item2['owner_addr'], name=item2['pk'], meta=json.dumps(item2)))
+        res.append(self.nft.mint(to_=item3['owner_addr'], name=item3['pk'], meta=json.dumps(item3)))
+        res.append(self.nft.mint(to_=item4['owner_addr'], name=item4['pk'], meta=json.dumps(item4)))
+        res.append(self.nft.mint(to_=item5['owner_addr'], name=item5['pk'], meta=json.dumps(item5)))
+        res.append(self.nft.mint(to_=item6['owner_addr'], name=item6['pk'], meta=json.dumps(item6)))
+        res.append(self.nft.mint(to_=item7['owner_addr'], name=item7['pk'], meta=json.dumps(item7)))
+        res.append(self.nft.mint(to_=item8['owner_addr'], name=item8['pk'], meta=json.dumps(item8)))
+        res.append(self.nft.mint(to_=item9['owner_addr'], name=item9['pk'], meta=json.dumps(item9)))
+        res.append(self.nft.mint(to_=item10['owner_addr'], name=item10['pk'], meta=json.dumps(item10)))
 
         return res
 
