@@ -132,7 +132,8 @@ def buyimage():
         fromAddress=params['fromAddress'],
         toAddress=params['toAddress'],
         tokenIndex=params['tokenIndex'],
-        price=params['price']
+        price=params['price'],
+        pk = params['pk']
     )
     pprint(res)
 

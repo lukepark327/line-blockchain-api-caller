@@ -178,7 +178,8 @@ class Fantopia:
         fromAddress: str,
         toAddress: str,
         tokenIndex: str,
-        price: str
+        price: str,
+        pk: str
     ):
         meta = json.loads(self.nft.get_info(tokenIndex)['responseData']['meta'])
         artistAddress = meta['artist_addr']
@@ -186,6 +187,8 @@ class Fantopia:
         price_ = meta['price']
         if price != price_:
             return
+
+        self.DB.table[pk]['is_selled'] = True
 
         price = int(price)
         for_artist, for_platform = int(price * self.artist_fee), int(price * self.platform_fee)
