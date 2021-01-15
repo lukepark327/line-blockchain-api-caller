@@ -122,6 +122,22 @@ def updatefavorite():
     return 'Success'
 
 
+@app.route('/sellreset', methods=['POST'])
+def sellreset():
+    params = {}
+    try:
+        params = json.loads(request.get_data(), encoding='utf-8')
+    except:
+        pass
+
+    startNum = params['startNum'] if 'startNum' in params else 0
+    endNum = params['endNum'] if 'endNum' in params else 100
+
+    res = fantopia.sellReset(startNum=startNum, endNum=endNum)
+
+    return json.dumps(res)
+
+
 @app.route('/buyimage', methods=['POST'])
 def buyimage():
     params = json.loads(request.get_data(), encoding='utf-8')

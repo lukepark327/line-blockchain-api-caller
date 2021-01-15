@@ -114,16 +114,29 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/updatefav
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/updatefavorite -d '{"pk": "2", "favor": true}'
 ```
 
+### Reset detail: sell
+
+```
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/sellreset -d '{"startNum": 1, "endNum": 3}'
+```
+
+*or*
+
+```
+curl -X POST http://localhost:5000/sellreset
+```
+
 ### Buy image
 
 ```
-curl -X POST -H 'Content-Type: application/json' http://localhost:5000/buyimage -d '{"fromAddress": "tlink1lnl66me3geg6t2l62w07rx5j2utewvn54908vd", "toAddress": "tlink1jweegl733lmfdusfknelge8d82ftcfmrnm3r48", "tokenIndex": "00000085", "price": "10000"}'
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/buyimage -d '{"fromAddress": "tlink1lnl66me3geg6t2l62w07rx5j2utewvn54908vd", "toAddress": "tlink1jweegl733lmfdusfknelge8d82ftcfmrnm3r48", "tokenIndex": "00000085", "price": "10000", "pk": "1"}'
 ```
 
 * `fromAddress`: Wallet address of buyer
 * `toAddress`: Wallet address of image seller
 * `tokenIndex`: NFT token index
 * `price`: Price of the image. It MUST be same as seller-uploaded price.
+* `pk`: Primary Key.
 
 <!--
 ## :coffee: Product

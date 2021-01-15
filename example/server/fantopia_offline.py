@@ -173,6 +173,9 @@ class Fantopia:
     def updateFavorite(self, primaryKey: str, favor=True):
         self.DB.updateFavorite(primaryKey, favor)
 
+    def sellReset(self, startNum=0, endNum=100):
+        self.DB.sellReset(startNum=startNum, endNum=endNum)
+
     def buy(
         self,
         fromAddress: str,

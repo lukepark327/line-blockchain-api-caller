@@ -42,3 +42,7 @@ class DB:
 
     # def set_price(self, name, new_price, number=0):
     #     self.images[(name, str(number))]['price'] = str(new_price)
+
+    def sellReset(self, startNum=0, endNum=100):
+        for pk in range(max(startNum, 1), min(endNum, DB._pkIndex)):
+            self.table[str(pk)]['is_selled'] = False
