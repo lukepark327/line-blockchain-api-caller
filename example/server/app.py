@@ -6,8 +6,8 @@ from flask import Flask, request, send_file
 from werkzeug.utils import secure_filename
 from pprint import pprint
 
-# from fantopia import Fantopia
-from fantopia_offline import Fantopia
+from fantopia import Fantopia
+# from fantopia_offline import Fantopia
 
 import sys
 sys.path.append('../../caller/')
@@ -135,7 +135,7 @@ def sellreset():
 
     res = fantopia.sellReset(startNum=startNum, endNum=endNum)
 
-    return json.dumps(res)
+    return 'Success'
 
 
 @app.route('/buyimage', methods=['POST'])
@@ -144,12 +144,15 @@ def buyimage():
     if len(params) == 0:
         return 'No parameter'
 
+    tokenIndex = params['tokenIndex'] if 'tokenIndex' in params else None
+    price = params['price'] if 'price' in params else None
+
     res = fantopia.buy(
+        pk=params['pk'],
         fromAddress=params['fromAddress'],
         toAddress=params['toAddress'],
-        tokenIndex=params['tokenIndex'],
-        price=params['price'],
-        pk = params['pk']
+        tokenIndex=tokenIndex,
+        price=price,
     )
     pprint(res)
 
@@ -173,49 +176,49 @@ def gettx():
     return json.dumps(res) or 'Success'
 
 
-@app.route('/test', methods=['GET'])
-def test():
-    ress = []
+# @app.route('/test', methods=['GET'])
+# def test():
+#     ress = []
 
-    # Load info.
-    with open('./users.json') as f:
-        users = json.load(f)
+#     # Load info.
+#     with open('./users.json') as f:
+#         users = json.load(f)
 
-    owner = users['Owner']
-    artist = users['Artist']
-    user_A = users['Customer_A']
-    user_B = users['Customer_B']
+#     owner = users['Owner']
+#     artist = users['Artist']
+#     user_A = users['Customer_A']
+#     user_B = users['Customer_B']
 
-    with open('./config.json') as f:
-        config = json.load(f)
+#     with open('./config.json') as f:
+#         config = json.load(f)
 
-    # Add artist
-    fantopia.add_artist(artist)
+#     # Add artist
+#     fantopia.add_artist(artist)
 
-    # Add user
-    fantopia.add_user(user_A)
-    fantopia.add_user(user_B)
+#     # Add user
+#     fantopia.add_user(user_A)
+#     fantopia.add_user(user_B)
 
-    # Buy image
-    res = fantopia.buy(
-        fromAddress=user_B['address'],
-        toAddress=user_A['address'],
-        tokenIndex='00000085',
-        price='10000'
-    )
-    pprint(res)
-    ress.append(res)
+#     # Buy image
+#     res = fantopia.buy(
+#         fromAddress=user_B['address'],
+#         toAddress=user_A['address'],
+#         tokenIndex='00000085',
+#         price='10000'
+#     )
+#     pprint(res)
+#     ress.append(res)
 
-    res = get_transaction_info(
-        server_url=config['server_url'],
-        service_api_key=config['service_api_key'],
-        service_api_secret=config['service_api_secret'],
-        txHash="DCD0B2D32E9329D77AA642A55DC10469A876767493D2F60254A70E4DCD099202"
-    )
-    pprint(res)
-    ress.append(res)
+#     res = get_transaction_info(
+#         server_url=config['server_url'],
+#         service_api_key=config['service_api_key'],
+#         service_api_secret=config['service_api_secret'],
+#         txHash="DCD0B2D32E9329D77AA642A55DC10469A876767493D2F60254A70E4DCD099202"
+#     )
+#     pprint(res)
+#     ress.append(res)
 
-    return json.dumps(ress) or 'Success'
+#     return json.dumps(ress) or 'Success'
 
 
 if __name__ == "__main__":
@@ -231,4 +234,4 @@ if __name__ == "__main__":
     # Set Fantopia service
     fantopia = Fantopia(owner, config)
 
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', debug=False)

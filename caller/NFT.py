@@ -203,7 +203,7 @@ if __name__ == "__main__":
     import json
 
     # Load info.
-    with open('./users.json') as f:
+    with open('../example/server/users.json') as f:
         users = json.load(f)
 
     owner = users['Owner']
@@ -211,7 +211,7 @@ if __name__ == "__main__":
     user_A = users['Customer_A']
     user_B = users['Customer_B']
 
-    with open('./config.json') as f:
+    with open('../example/server/config.json') as f:
         config = json.load(f)
 
     # NFT

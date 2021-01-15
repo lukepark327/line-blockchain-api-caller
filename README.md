@@ -48,7 +48,7 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/addartist
 ### Add user
 
 ```
-curl -X POST -H 'Content-Type: application/json' http://localhost:5000/adduser -d '{"address": "tlink1jweegl733lmfdusfknelge8d82ftcfmrnm3r48", "secret": "zqDvlusIMR+Ci1WparUmk/CfKXeKtxCPR23SzbzGroo="}'
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/adduser -d '{"address": "tlink18vsd3cautlyt759sw5hq9tydhzrsrgrmprs4f0", "secret": "gD6Skn0b66WLt5oq8OYe0ejI4OzjthyWMYm4V7gqamg="}'
 ```
 ```
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/adduser -d '{"address": "tlink1lnl66me3geg6t2l62w07rx5j2utewvn54908vd", "secret": "UkbP/u5dyLqj2vUELA0WMQtcwaA5IxBEomYmdojX3uY="}'
@@ -93,13 +93,13 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getimage 
 ### Get multiple images
 
 ```
-curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getallimages -d '{"startNum": 1, "endNum": 3}'
+curl -X POST http://localhost:5000/getallimages
 ```
 
 *or*
 
 ```
-curl -X POST http://localhost:5000/getallimages
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getallimages -d '{"startNum": 1, "endNum": 3}'
 ```
 
 ### Update detail: favorite
@@ -117,26 +117,32 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/updatefav
 ### Reset detail: sell
 
 ```
-curl -X POST -H 'Content-Type: application/json' http://localhost:5000/sellreset -d '{"startNum": 1, "endNum": 3}'
+curl -X POST http://localhost:5000/sellreset
 ```
 
 *or*
 
 ```
-curl -X POST http://localhost:5000/sellreset
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/sellreset -d '{"startNum": 1, "endNum": 3}'
 ```
 
 ### Buy image
 
 ```
-curl -X POST -H 'Content-Type: application/json' http://localhost:5000/buyimage -d '{"fromAddress": "tlink1lnl66me3geg6t2l62w07rx5j2utewvn54908vd", "toAddress": "tlink1jweegl733lmfdusfknelge8d82ftcfmrnm3r48", "tokenIndex": "00000085", "price": "10000", "pk": "1"}'
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/buyimage -d '{"pk": "1", "fromAddress": "tlink1lnl66me3geg6t2l62w07rx5j2utewvn54908vd", "toAddress": "tlink18vsd3cautlyt759sw5hq9tydhzrsrgrmprs4f0"}'
 ```
 
+*or*
+
+```
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/buyimage -d '{"pk": "1", "fromAddress": "tlink1lnl66me3geg6t2l62w07rx5j2utewvn54908vd", "toAddress": "tlink18vsd3cautlyt759sw5hq9tydhzrsrgrmprs4f0", "tokenIndex": "000000c3", "price": "32400"}'
+```
+
+* `pk`: Primary Key.
 * `fromAddress`: Wallet address of buyer
 * `toAddress`: Wallet address of image seller
-* `tokenIndex`: NFT token index
-* `price`: Price of the image. It MUST be same as seller-uploaded price.
-* `pk`: Primary Key.
+* `tokenIndex`: (optional) NFT token index
+* `price`: (optional) Price of the image. It MUST be higher or same as seller-uploaded price.
 
 <!--
 ## :coffee: Product
@@ -190,8 +196,10 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getproduc
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/gettx -d '{"txHash": "DCD0B2D32E9329D77AA642A55DC10469A876767493D2F60254A70E4DCD099202"}'
 ```
 
+<!--
 ### Test
 
 ```
 curl http://localhost:5000/test
 ```
+-->
