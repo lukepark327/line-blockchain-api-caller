@@ -135,7 +135,7 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/buyimage 
 *or*
 
 ```
-curl -X POST -H 'Content-Type: application/json' http://localhost:5000/buyimage -d '{"pk": "1", "fromAddress": "tlink1lnl66me3geg6t2l62w07rx5j2utewvn54908vd", "toAddress": "tlink18vsd3cautlyt759sw5hq9tydhzrsrgrmprs4f0", "tokenIndex": "000000c3", "price": "32400"}'
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/buyimage -d '{"pk": "1", "fromAddress": "tlink1lnl66me3geg6t2l62w07rx5j2utewvn54908vd", "toAddress": "tlink18vsd3cautlyt759sw5hq9tydhzrsrgrmprs4f0", "tokenIndex": "000000c3", "price": "100"}'
 ```
 
 * `pk`: Primary Key.
@@ -190,6 +190,17 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getproduc
 
 ## :wrench: Utils
 
+### Get Service Token Balance
+
+```
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getbalance -d '{"address": "tlink18vsd3cautlyt759sw5hq9tydhzrsrgrmprs4f0"}'
+```
+
+### Get NFT info.
+
+```
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getinfo -d '{"tokenIndex": "000000c3"}'
+```
 ### Get transaction info.
 
 ```

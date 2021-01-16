@@ -21,7 +21,8 @@ class Fantopia:
     def __init__(
         self,
         owner: dict,
-        config: dict
+        config: dict,
+        sampleLoad: int = 20
     ):
         self.owner = {}
         self.ownerAddress = owner['address']
@@ -34,13 +35,13 @@ class Fantopia:
         self.nft = NFT(self.tokenType, owner, config)   # NFT
         self.st = ServiceToken(owner, config)           # [FAN]
 
-        self.artist_fee = 0.0025    # 0.25%
-        self.platform_fee = 0.0005  # 0.05%
+        self.artist_fee = 0.05    # 5%
+        self.platform_fee = 0.05  # 5%
 
         self.config = config
 
         self.DB = DB()
-        _ = self.insertSamples(startNum=0, endNum=20)
+        _ = self.insertSamples(startNum=0, endNum=sampleLoad)
 
     def insertSamples(self, startNum=0, endNum=20):
         res = []
@@ -149,7 +150,7 @@ if __name__ == "__main__":
         fromAddress=user_B['address'],
         toAddress=user_A['address'],
         # tokenIndex='00000085',
-        price='32400'
+        price='100'
     )
     pprint(res)
 

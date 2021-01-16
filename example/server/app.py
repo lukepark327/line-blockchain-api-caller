@@ -176,6 +176,34 @@ def gettx():
     return json.dumps(res) or 'Success'
 
 
+@app.route('/getinfo', methods=['POST'])
+def getinfo():
+    params = json.loads(request.get_data(), encoding='utf-8')
+    if len(params) == 0:
+        return 'No parameter'
+
+    res = fantopia.nft.get_info(number=params['tokenIndex'])['responseData']['meta']
+    pprint(res)
+
+    return json.dumps(res) or 'Success'
+
+
+@app.route('/getbalance', methods=['POST'])
+def getbalance():
+    params = json.loads(request.get_data(), encoding='utf-8')
+    if len(params) == 0:
+        return 'No parameter'
+
+    address = params['address']
+    reses = fantopia.st.holders()['responseData']
+    for res in reses:
+        if res['address'] == address:
+            pprint(res['amount'])
+            return json.dumps(res['amount']) or 'Success'
+
+    return json.dumps("")
+
+
 # @app.route('/test', methods=['GET'])
 # def test():
 #     ress = []
@@ -232,6 +260,6 @@ if __name__ == "__main__":
         config = json.load(f)
 
     # Set Fantopia service
-    fantopia = Fantopia(owner, config)
+    fantopia = Fantopia(owner, config, sampleLoad=2)
 
     app.run(host='0.0.0.0', debug=False)
