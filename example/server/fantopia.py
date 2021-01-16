@@ -156,12 +156,6 @@ class Fantopia:
         res.append(self.st.transfer(
             fromAddress=fromAddress,
             walletSecret=self.users[fromAddress],
-            toAddress=toAddress,
-            amount=for_receiver
-        )['responseData']['txHash'])
-        res.append(self.st.transfer(
-            fromAddress=fromAddress,
-            walletSecret=self.users[fromAddress],
             toAddress=artistAddress,
             amount=for_artist
         )['responseData']['txHash'])
@@ -170,6 +164,12 @@ class Fantopia:
             walletSecret=self.users[fromAddress],
             toAddress=self.ownerAddress,
             amount=for_platform
+        )['responseData']['txHash'])
+        res.append(self.st.transfer(
+            fromAddress=fromAddress,
+            walletSecret=self.users[fromAddress],
+            toAddress=toAddress,
+            amount=for_receiver
         )['responseData']['txHash'])
 
         # update DB
