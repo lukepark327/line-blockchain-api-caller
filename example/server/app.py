@@ -260,6 +260,6 @@ if __name__ == "__main__":
         config = json.load(f)
 
     # Set Fantopia service
-    fantopia = Fantopia(owner, config, sampleLoad=2)
+    fantopia = Fantopia(owner, config)
 
     app.run(host='0.0.0.0', debug=False)
