@@ -15,6 +15,8 @@ The concrete example of LINE blockchain API caller.
 
 # Run (Server-side)
 
+## Fantopia Server
+
 ```
 cd example/server
 python app.py
@@ -28,15 +30,26 @@ docker build -t fantopia:latest .
 docker run -d -p 5000:5000 fantopia
 ```
 
+<!--
+## Image Server
+
+```
+cd example/image_server
+python web.py
+```
+-->
+
 # Curl (Client-side)
 
+<!--
 ```
 cd example/client
 ```
+-->
 
 ## :couple: User
 
-### Add artist
+### Add Artist
 
 ```
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/addartist -d '{"address": "tlink1e38npkztaq90vvc3gnjhn0th8w52na005ahqf0", "secret": "QC3PbuSMC101uDBCOTWJeCsjSCuI57XvVnUDH8623iw="}'
@@ -45,7 +58,7 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/addartist
 * `address`: Wallet address
 * `secret`: PW
 
-### Add user
+### Add User
 
 ```
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/adduser -d '{"address": "tlink18vsd3cautlyt759sw5hq9tydhzrsrgrmprs4f0", "secret": "gD6Skn0b66WLt5oq8OYe0ejI4OzjthyWMYm4V7gqamg="}'
@@ -84,13 +97,13 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/uploaddet
 * `price`: (optional) Price of the image
 -->
 
-### Get one image
+### Get One Image
 
 ```
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getimage -d '{"pk": "1"}'
 ```
 
-### Get multiple images
+### Get Multiple Images
 
 ```
 curl -X POST http://localhost:5000/getallimages
@@ -102,7 +115,7 @@ curl -X POST http://localhost:5000/getallimages
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getallimages -d '{"startNum": 1, "endNum": 3}'
 ```
 
-### Update detail: favorite
+### Update Detail: Favorite
 
 ```
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/updatefavorite -d '{"pk": "2"}'
@@ -114,7 +127,7 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/updatefav
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/updatefavorite -d '{"pk": "2", "favor": true}'
 ```
 
-### Reset detail: sell
+### Reset Detail: Sell
 
 ```
 curl -X POST http://localhost:5000/sellreset
@@ -126,7 +139,7 @@ curl -X POST http://localhost:5000/sellreset
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/sellreset -d '{"startNum": 1, "endNum": 3}'
 ```
 
-### Buy image
+### Buy Image
 
 ```
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/buyimage -d '{"pk": "1", "fromAddress": "tlink1lnl66me3geg6t2l62w07rx5j2utewvn54908vd", "toAddress": "tlink18vsd3cautlyt759sw5hq9tydhzrsrgrmprs4f0"}'
@@ -143,6 +156,14 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/buyimage 
 * `toAddress`: Wallet address of image seller
 * `tokenIndex`: (optional) NFT token index
 * `price`: (optional) Price of the image. It MUST be higher or same as seller-uploaded price.
+
+### Buy Goods
+
+```
+curl -X POST -H 'Content-Type: application/json' http://localhost:5000/buygoods -d '{"pk": "1"}'
+```
+
+Changing `is_selled` to `true`.
 
 <!--
 ## :coffee: Product
@@ -196,12 +217,13 @@ curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getproduc
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getbalance -d '{"address": "tlink18vsd3cautlyt759sw5hq9tydhzrsrgrmprs4f0"}'
 ```
 
-### Get NFT info.
+### Get NFT Info.
 
 ```
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/getinfo -d '{"tokenIndex": "000000c3"}'
 ```
-### Get transaction info.
+
+### Get Transaction Info.
 
 ```
 curl -X POST -H 'Content-Type: application/json' http://localhost:5000/gettx -d '{"txHash": "DCD0B2D32E9329D77AA642A55DC10469A876767493D2F60254A70E4DCD099202"}'

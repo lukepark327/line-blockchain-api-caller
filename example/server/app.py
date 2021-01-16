@@ -159,6 +159,17 @@ def buyimage():
     return json.dumps(res) or 'Success'
 
 
+@app.route('/buygoods', methods=['POST'])
+def buygoods():
+    params = json.loads(request.get_data(), encoding='utf-8')
+    if len(params) == 0:
+        return 'No parameter'
+
+    fantopia.buyGoods(pk=params['pk'])
+
+    return 'Success'
+
+
 @app.route('/gettx', methods=['POST'])
 def gettx():
     params = json.loads(request.get_data(), encoding='utf-8')

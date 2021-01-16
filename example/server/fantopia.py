@@ -37,9 +37,10 @@ class Fantopia:
         self.config = config
 
         self.DB = DB()
-        _ = self.insertSamples(startNum=0, endNum=sampleLoad)
+        # _ = self.insertSamples_online(startNum=0, endNum=sampleLoad)
+        self.insertSamples_offline(startNum=0, endNum=sampleLoad)
 
-    def insertSamples(self, startNum=0, endNum=20):
+    def insertSamples_online(self, startNum=0, endNum=20):
         res = []
 
         print("Init: Upload Samples...")
@@ -86,6 +87,19 @@ class Fantopia:
             res.append(tx_hash)
 
         return res
+
+    def insertSamples_offline(self, startNum=0, endNum=20):
+        print("Init: Upload Samples...")
+        for i in tqdm(range(startNum, endNum)):
+            with open('./samples/sample' + str(i) + '.json', 'r') as f:
+                sample = json.load(f)
+
+            # index
+            idx = self.DB._getPkIndex()
+            sample['pk'] = idx
+
+            # insert at DB
+            self.DB.table[idx] = sample
 
     # def change_owner(self):
     #     pass
@@ -179,6 +193,9 @@ class Fantopia:
 
         # return txs
         return res
+
+    def buyGoods(self, pk: str):
+        self.DB.table[pk]['is_selled'] = True
 
 
 if __name__ == "__main__":
